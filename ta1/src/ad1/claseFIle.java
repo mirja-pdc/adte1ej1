@@ -1,16 +1,18 @@
+package ad1;
+
 import java.io.File;
 
 /**
  * Prueba con vídeos de File de AD01 en mi Mac
  * Uso File.separator para independencia entre ruta fichero y SO
  */
-public class App {
+public class claseFIle {
     public static void main(String[] args) {
     	System.out.println("Información sobre el fichero:");
     	
     	File f = new File(File.separator + "Users" 
         	    + File.separator + "mirja" 
-        		+ File.separator + "Documentos" 
+        		+ File.separator + "Documents" 
         	    + File.separator + "DAM" 
         		+ File.separator + "AD" 
         	    + File.separator + "pruebaLectura.txt");
@@ -29,3 +31,4 @@ public class App {
        
     }
 }
+
