@@ -24,6 +24,8 @@ public class FileReaderyFileWriter {
 		File salida = new File("." + File.separator + "salida.txt");
 		
 		// Leemos fichero de entrada caracter por carácter y lo escribimos, modificado o no, en salida.txt
+		System.out.println("Se creará un fichero que pase las minúsculas a mayúsculas y oculte los dígitos.");
+		
 		// Para ello creamos objetos FileReader y FileWriter, para leer y escribir respectivamente,
 		// envueltos en un try-catch por si hay problemas al abrir o crear los ficheros
 		try {
@@ -32,20 +34,21 @@ public class FileReaderyFileWriter {
 			FileWriter fiw = new FileWriter(salida);
 			
 			// Creamos variable int para recoger el carácter leído y char para traducirlo a caracter, 
-			// siempre que el int no sea -1 y no se haya llegado al final del fichero
+			// siempre que el int no sea -1 y por tanto no se haya llegado al final del fichero
 			int i;
-			char caracter = 0;
-			System.out.println("Se ha creado un fichero que pasa las minúsculas a mayúsculas y oculta los dígitos.");
+			char caracter;
 			
 			while ((i=fir.read())!=-1) {
 				//Leer el caracter y modificar si procede
-				caracter = (char)i;
-				if(caracter>=97 && caracter<=122){
-					caracter-=32;
-				} else if(caracter>=65 && caracter<=90){
-					caracter+=32;
-				}
-				fiw.write(caracter);
+				// OBTENIDO DE GEMINI: Si es una letra, se transforma a mayúscula
+                if (Character.isLetter(caracter)) {
+                    caracter = Character.toUpperCase(caracter);
+                } 
+                // OBTENIDO DE GEMINIi Si es un dígito (0-9), se sustituye por #
+                else if (Character.isDigit(caracter)) {
+                    caracter = '#';
+                }
+                
 			}
 			
 			fir.close();
