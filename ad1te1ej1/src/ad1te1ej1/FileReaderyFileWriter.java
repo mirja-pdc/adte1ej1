@@ -9,6 +9,8 @@ import java.io.IOException;
 // Las letras se escriben en mayúsculas.
 // Cada dígito del 0 al 9 se sustituye por el carácter #.
 // El resto de caracteres, incluyendo espacios y saltos de línea, se conservan.
+// He utilizado como modelo la solución al Ejercicio 2 de la Tarea de Aprendizaje 3 
+// (https://github.com/ad-birt/ud1-tareaAprendizaje3/blob/master/src/ejercicios/Ud1TareaAprendizaje3Ejercicio2.java)
 
 public class FileReaderyFileWriter {
 	public static void main(String[] args) {
@@ -30,6 +32,8 @@ public class FileReaderyFileWriter {
 		// envueltos en un try-with-resources POR CORRECCIÓN DE GEMINI por si hay problemas al abrir o crear los ficheros
 		// (Mi código original usaba solo try-catch con el catch (IOException e), y además se me había olvidado
 		// eliminar el "throws IOException" al declarar crearFicheroMod() y el main().)
+		// Después de hacer la corrección he vuelto a leer el apartado 10 de los apuntes, 
+		// y he visto que el código del apartado sobre FileReader y FileWriter incluía un try-with-resources.
 		try (FileReader fir = new FileReader(entrada);
 			FileWriter fiw = new FileWriter(salida)) {
 			
