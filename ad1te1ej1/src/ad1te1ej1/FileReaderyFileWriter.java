@@ -11,7 +11,7 @@ import java.io.IOException;
 // El resto de caracteres, incluyendo espacios y saltos de línea, se conservan.
 
 public class FileReaderyFileWriter {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		
 		crearFicheroMod();
 	
@@ -29,7 +29,7 @@ public class FileReaderyFileWriter {
 		// Para ello creamos objetos FileReader y FileWriter, para leer y escribir respectivamente,
 		// envueltos en un try-with-resources POR CORRECCIÓN DE GEMINI por si hay problemas al abrir o crear los ficheros
 		// (Mi código original usaba solo try-catch con el catch (IOException e), y además se me había olvidado
-		// eliminar el "throws IOException" al declarar crearFicheroMod().)
+		// eliminar el "throws IOException" al declarar crearFicheroMod() y el main().)
 		try (FileReader fir = new FileReader(entrada);
 			FileWriter fiw = new FileWriter(salida)) {
 			
@@ -46,7 +46,7 @@ public class FileReaderyFileWriter {
                 if (Character.isLetter(caracter)) {
                     caracter = Character.toUpperCase(caracter);
                 } 
-                // OBTENIDO DE GEMINIi Si es un dígito (0-9), se sustituye por #
+                // OBTENIDO DE GEMINI: Si es un dígito (0-9), se sustituye por #
                 else if (Character.isDigit(caracter)) {
                     caracter = '#';
                 }
