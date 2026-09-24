@@ -17,7 +17,7 @@ public class FileReaderyFileWriter {
 	
     }
 
-	private static void crearFicheroMod() throws IOException {
+	private static void crearFicheroMod() {
 		
 		// Creamos objetos File de entrada y salida
 		File entrada = new File ("." + File.separator + "entrada.txt");
@@ -27,11 +27,11 @@ public class FileReaderyFileWriter {
 		System.out.println("Se creará un fichero que pase las minúsculas a mayúsculas y oculte los dígitos.");
 		
 		// Para ello creamos objetos FileReader y FileWriter, para leer y escribir respectivamente,
-		// envueltos en un try-catch por si hay problemas al abrir o crear los ficheros
-		try {
-			
-			FileReader fir = new FileReader(entrada);
-			FileWriter fiw = new FileWriter(salida);
+		// envueltos en un try-with-resources POR CORRECCIÓN DE GEMINI por si hay problemas al abrir o crear los ficheros
+		// (Mi código original usaba solo try-catch con el catch (IOException e), y además se me había olvidado
+		// eliminar el "throws IOException" al declarar crearFicheroMod().)
+		try (FileReader fir = new FileReader(entrada);
+			FileWriter fiw = new FileWriter(salida)) {
 			
 			// Creamos variable int para recoger el carácter leído y char para traducirlo a caracter, 
 			// siempre que el int no sea -1 y por tanto no se haya llegado al final del fichero
@@ -39,7 +39,9 @@ public class FileReaderyFileWriter {
 			char caracter;
 			
 			while ((i=fir.read())!=-1) {
+				
 				//Leer el caracter y modificar si procede
+				caracter = (char) i;
 				// OBTENIDO DE GEMINI: Si es una letra, se transforma a mayúscula
                 if (Character.isLetter(caracter)) {
                     caracter = Character.toUpperCase(caracter);
@@ -49,10 +51,15 @@ public class FileReaderyFileWriter {
                     caracter = '#';
                 }
                 
+                // Escribir el carácter en salida.txt
+                fiw.write(caracter);
+                
 			}
 			
-			fir.close();
-			fiw.close();
+			// Ya no hace falta cerrar fir ni fiw porque ahora uso try-with-resources
+			// por recomendación de Gemini, así que dejo las líneas comentadas
+			// fir.close();
+			// fiw.close();
 			
 		} catch (IOException e) {
             System.err.println("Error al procesar los ficheros: " + e.getMessage());
